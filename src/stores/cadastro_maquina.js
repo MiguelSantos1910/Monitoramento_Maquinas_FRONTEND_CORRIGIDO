@@ -19,7 +19,7 @@ export const useMaquinasStore = defineStore('maquinas', {
   actions: {
     async cadastrarMaquina(dados) {
       try{
-        const res = await axios.post('http://localhost:3000/api/maquinas/cadastrar-maquinas', dados);
+        const res = await axios.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/cadastrar-maquinas', dados);
         this.maquinas.push(res.data);
         return {ok: true};
       }catch(error){
@@ -29,7 +29,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async carregarMaquinas() {
       try{
-        const res = await axios.get('http://localhost:3000/api/maquinas/lista-maquinas');
+        const res = await axios.get('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/lista-maquinas');
         this.maquinas = res.data;
       }catch(error){
         console.error("Erro ao carregar máquinas:", error);
@@ -40,7 +40,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async deletarMaquina(id) {
       try{
-        await axios.delete(`http://localhost:3000/api/maquinas/${id}`);
+        await axios.delete(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`);
         this.maquinas = this.maquinas.filter(m => m._id !== id);
         return {ok: true};
       }catch(error){
@@ -50,7 +50,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async editarMaquina(id, dadosEditados) {
       try{
-        const res = await axios.put(`http://localhost:3000/api/maquinas/${id}`, dadosEditados);
+        const res = await axios.put(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`, dadosEditados);
         const index = this.maquinas.findIndex(m => m._id === id);
         if (index !== -1) {
           this.maquinas[index] = res.data;
@@ -62,4 +62,5 @@ export const useMaquinasStore = defineStore('maquinas', {
       } 
     }
   }
+
 });
