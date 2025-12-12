@@ -43,7 +43,7 @@ export const useCadastroManutencao = defineStore('manutencao', {
   actions: {
     async cadastrarManutencao(dadosManutencao) {
       try{
-        const res = await axios.post('http://localhost:3000/api/ordens/cadastrar-os', dadosManutencao);
+        const res = await axios.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/ordens/cadastrar-os', dadosManutencao);
          this.manutencao.push(res.data);
          return {ok: true};
       }catch(error){
@@ -53,7 +53,7 @@ export const useCadastroManutencao = defineStore('manutencao', {
     },
     async carregarManutencao() {
       try{
-        const res = await axios.get('http://localhost:3000/api/ordens/consultar-os');
+        const res = await axios.get('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/ordens/consultar-os');
         this.manutencao = res.data;
       }catch(error){
         console.error("Erro ao carregar manutenções:", error);
@@ -64,7 +64,7 @@ export const useCadastroManutencao = defineStore('manutencao', {
     },
     async deletarManutencao() {
       try{
-        await axios.delete(`http://localhost:3000/api/ordens/${id}`);
+        await axios.delete(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/ordens/${id}`);
         this.manutencao = this.manutencao.filter(m => m.id !== id);
         return {ok: true};
       }catch(error){
@@ -74,7 +74,7 @@ export const useCadastroManutencao = defineStore('manutencao', {
     },
     async atualizarManutencao(id, dadosAtualizados) {
       try{
-        const res = await axios.put(`http://localhost:3000/api/ordens/${id}`, dadosAtualizados);
+        const res = await axios.put(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/ordens/${id}`, dadosAtualizados);
         const index = this.manutencao.findIndex(m => m._id === id);
         if (index !== -1) {
           this.manutencao[index] = res.data;
@@ -86,4 +86,5 @@ export const useCadastroManutencao = defineStore('manutencao', {
       }
     }
   }
+
 });
