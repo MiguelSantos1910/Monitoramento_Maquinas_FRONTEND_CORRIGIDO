@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(email, senha) {
       try {
-        const { data } = await axios.post('http://localhost:3000/api/usuarios/login', {
+        const { data } = await axios.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/usuarios/login', {
           email,
           senha
         })
@@ -38,7 +38,7 @@ export const useAuthStore = defineStore('auth', {
 
     async register(nome, email, senha){
       try{
-        const { data } = await axios.post('http://localhost:3000/api/usuarios/cadastrar-usuario', {
+        const { data } = await axios.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/usuarios/cadastrar-usuario', {
           nome,
           email,
           senha
@@ -65,7 +65,7 @@ export const useAuthStore = defineStore('auth', {
 
      async usuariosCadastrados(){
       try{
-        const {data} = axios.get('http://localhost:3000/api/usuarios/lista-usuarios', {nome})
+        const {data} = axios.get('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/usuarios/lista-usuarios', {nome})
         this.user = data.usuario
       }catch(error){
         console.error('Erro ao carregar os usuarios', error)
