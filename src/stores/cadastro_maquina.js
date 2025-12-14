@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import api from '@/services/api';
 
 export const useMaquinasStore = defineStore('maquinas', {
   state: () => ({
@@ -19,7 +20,7 @@ export const useMaquinasStore = defineStore('maquinas', {
   actions: {
     async cadastrarMaquina(dados) {
       try{
-        const res = await axios.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/cadastrar-maquinas', dados);
+        const res = await api.post('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/cadastrar-maquinas', dados);
         this.maquinas.push(res.data);
         return {ok: true};
       }catch(error){
@@ -29,7 +30,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async carregarMaquinas() {
       try{
-        const res = await axios.get('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/lista-maquinas');
+        const res = await api.get('https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/lista-maquinas');
         this.maquinas = res.data;
       }catch(error){
         console.error("Erro ao carregar máquinas:", error);
@@ -40,7 +41,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async deletarMaquina(id) {
       try{
-        await axios.delete(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`);
+        await api.delete(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`);
         this.maquinas = this.maquinas.filter(m => m._id !== id);
         return {ok: true};
       }catch(error){
@@ -50,7 +51,7 @@ export const useMaquinasStore = defineStore('maquinas', {
     },
     async editarMaquina(id, dadosEditados) {
       try{
-        const res = await axios.put(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`, dadosEditados);
+        const res = await api.put(`https://monitoramento-maquinas-backend-corrigido.onrender.com/api/maquinas/${id}`, dadosEditados);
         const index = this.maquinas.findIndex(m => m._id === id);
         if (index !== -1) {
           this.maquinas[index] = res.data;
@@ -64,3 +65,4 @@ export const useMaquinasStore = defineStore('maquinas', {
   }
 
 });
+
